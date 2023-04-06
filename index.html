@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+body{ padding:10px;}
+.container{
+     display:grid;
+     grid-template-columns:1fr 1fr 1fr;
+     align-content:center;
+     
+     margin:auto;
+     width:90%;
+     height:150px;
+     background-color:#4287f5;
+     border-radius:4px;
+     padding:10px;
+}
+.container>div {
+     margin:auto;
+     height:50px;
+     width:80px;
+     background-color:#ffffff;
+     border-radius:4px;
+     font-size:40px;
+     font-weight:bold;
+     text-align:center;
+}
+#massage{ font-size:30px; 
+color:red; font-weight:bold;
+text-align:center; width:100%;}
+#input{ display:grid; grid-template-rows:auto auto; }
+label{ color:black; font-size:40px; text-shadow:2px 2px 1px #a6a6a6;
+text-align:center; font-weight:bold;}
+#endDate{ margin-bottom:20px; height:40px;  border:2px solid #3dace3; 
+border-radius:4px; color:#db1616; font-size:20px; text-align:center;}
+</style>
+</head>
+<body>
+<div id="input">
+<label>Comming Soon</label>
+<input type="text" id ="endDate" >
+</div>
+<div class="container">
+   <div id="h">
+   </div>
+   <div id="m">
+   </div>
+   <div id="s">
+   </div>
+</div>
+<div id="massage">
+</div>
+<script>
+const stop= new Audio('Nudge.ogg');
+const enddate="6 April 2024 09:07 AM";
+document.querySelector('input').value= enddate;
+
+function timer(){
+
+const end=new Date(enddate).getTime();
+const now= new Date().getTime();
+const diff=(end - now)/1000;
+if(diff<=0){return ;}
+
+const s=Math.floor(diff%60);
+const m= Math.floor((diff/60)%60);
+const h= Math.floor(((diff/60)/60)%24);
+
+document.getElementById('h').innerHTML=h;
+document.getElementById('m').innerHTML=m;
+document.getElementById('s').innerHTML=s;
+
+if(h==0 && m==0 && s==0){
+ stop.play();
+ document.getElementById('massage').innerHTML="Time Is Over Now ";
+}
+
+}
+setInterval(timer,1000);
+
+</script>
+</body>
+</html>
